@@ -24,7 +24,7 @@ const createQuestion = (question, dispatch) => {
   return {
     id: question.id,
     timestamp: question.timestamp,
-    answers: [],
+    answers: question.answers,
   };
 };
 

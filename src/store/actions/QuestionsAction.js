@@ -1,7 +1,7 @@
 import * as _DATA from '../../_DATA';
 import { FETCH_QUESTIONS } from './ActionTypes';
 import { addAnswer } from './AnwersAction';
-import {  handleAnswerQuestion } from './PlayersAction';
+import { handleAnswerQuestion } from './PlayersAction';
 
 function generateUID() {
   return (
