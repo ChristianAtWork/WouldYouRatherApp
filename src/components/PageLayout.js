@@ -10,6 +10,11 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Route, Link } from 'react-router-dom';
 import Home from './routes/Home';
 import Login from './routes/Login';
+import { connect } from 'react-redux';
+import { handleFetchPlayers } from '../store/actions/PlayersAction';
+import { handleFetchQuestions } from '../store/actions/QuestionsAction';
+import { withRouter } from 'react-router-dom';
+import { logoutUserAction } from '../store/actions/UserAction';
 
 const styles = {
   root: {
@@ -17,51 +22,62 @@ const styles = {
   },
   grow: {
     flexGrow: 1,
-    color: '#FFF',    
+    color: '#FFF',
   },
   href: {
     color: 'white',
     textDecoration: 'inherit',
   },
-  
 };
 
 class PageLayout extends Component {
-  state = {
-    auth: true,
-  };
+  componentDidMount() {
+    this.props.dispatch(handleFetchPlayers());
+    this.props.dispatch(handleFetchQuestions());
+  }
 
   handleChange = event => {
     this.setState({ auth: event.target.checked });
   };
+  handleLogout = () => {
+    this.props.dispatch(logoutUserAction());
+    this.props.history.push('/Login');
+  };
+
+
 
   render() {
-    const { classes } = this.props;
-    const { auth } = this.state;
+    const { classes, user, players } = this.props;
 
     return (
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
             <Link to="/" className={classes.href}>
-              <MenuItem onClick={this.handleClose} selected={true}>
-                <Typography variant="h6" color="textPrimary" className={classes.grow}>
+              <MenuItem selected={true}>
+                <Typography variant="button" color="textPrimary" className={classes.grow}>
                   Home
                 </Typography>
               </MenuItem>
             </Link>
             <Link to="/login" className={classes.href}>
-              <MenuItem onClick={this.handleClose} >
-                <Typography variant="h6" color="textPrimary" className={classes.grow}>
+              <MenuItem>
+                <Typography variant="button" color="textPrimary" className={classes.grow}>
                   Login
                 </Typography>
               </MenuItem>
             </Link>
-            {auth && (
+            {user !== '' && (
               <div>
                 <IconButton color="inherit">
                   <AccountCircle />
                 </IconButton>
+                {players.byId[user].name}
+                  <MenuItem onClick={this.handleLogout}>
+                    <Typography variant="button" color="textPrimary" className={classes.grow}>
+                      Logout
+                    </Typography>
+                  </MenuItem>
               </div>
             )}
           </Toolbar>
@@ -75,6 +91,10 @@ class PageLayout extends Component {
 
 PageLayout.propTypes = {
   classes: PropTypes.object.isRequired,
+  user: PropTypes.string,
+  players: PropTypes.object,
 };
 
-export default withStyles(styles)(PageLayout);
+export default withRouter(
+  connect(state => ({ user: state.user, players: state.players }))(withStyles(styles)(PageLayout)),
+);
