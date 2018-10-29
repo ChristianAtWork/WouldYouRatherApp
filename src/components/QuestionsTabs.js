@@ -11,7 +11,7 @@ class QuestionsTabs extends Component {
   render() {
     return (
       <div>
-        <Tabs value={this.props.index || 0} onChange={this.handleChange}>
+        <Tabs fullWidth value={this.props.index || 0} onChange={this.handleChange}>
           <Tab label="Unanswered Questions" />
           <Tab label="Answered Questions" />
         </Tabs>

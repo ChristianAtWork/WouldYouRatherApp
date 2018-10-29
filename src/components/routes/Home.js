@@ -47,21 +47,24 @@ class Home extends Component {
     return (
       <div className={classes.container}>
         <Paper>
-          <QuestionsTabs index={index}onTabChange={this.handleTabChange} />
-          <div className={classes.cards}>
-            <SwipeableViews
-              axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-              index={index}
-              onChangeIndex={this.handleChangeIndex}
-            >
-              <TabContainer dir={theme.direction}>
+          <QuestionsTabs index={index} onTabChange={this.handleTabChange} />
+          <SwipeableViews
+            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+            index={index}
+            onChangeIndex={this.handleChangeIndex}
+          >
+            <TabContainer dir={theme.direction}>
+              <div className={classes.cards}>
                 <QuestionCards questionIds={[1, 2, 3]} />
-              </TabContainer>
-              <TabContainer dir={theme.direction}>
+              </div>
+            </TabContainer>
+
+            <TabContainer dir={theme.direction}>
+              <div className={classes.cards}>
                 <QuestionCards questionIds={[4, 5, 6]} />
-              </TabContainer>
-            </SwipeableViews>
-          </div>
+              </div>
+            </TabContainer>
+          </SwipeableViews>
         </Paper>
       </div>
     );
@@ -89,7 +92,7 @@ class Home extends Component {
 }
 function TabContainer({ children, dir }) {
   return (
-    <Typography component="div" dir={dir} >
+    <Typography component="div" dir={dir}>
       {children}
     </Typography>
   );
