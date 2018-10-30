@@ -6,21 +6,23 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { connect } from 'react-redux';
 import LoginDialog from '../LoginDialog';
 import PrimaryButton from '../PrimaryButton';
+import { loginUserAction } from '../../store/actions/UserAction';
+import { withRouter } from 'react-router-dom';
 
 const styles = {
   root: {
     display: 'flex',
     flexDirection: 'column',
-    flexGrow: 1,    
+    flexGrow: 1,
   },
-}
+};
 class Login extends React.Component {
   state = {
     open: false,
-    selectedUser: '',
+    selectedUserId: '',
   };
 
   handleClickOpen = () => {
@@ -29,20 +31,25 @@ class Login extends React.Component {
     });
   };
 
-  handleClose = value => {
-    this.setState({ selectedUser: value, open: false });
+  handleClose = id => {
+    this.setState({ open: false, selectedUserId: id });
   };
-  handleLoginUser = () => {};
+
+  handleLoginUser = () => {
+    this.props.dispatch(loginUserAction(this.state.selectedUserId));
+    this.props.history.push('/');
+  };
+
   render() {
     const { classes } = this.props;
-    
+    const { open, selectedUserId } = this.state;
     return (
       <div className={classes.root}>
-        <Typography variant="subtitle1">Selected User: {this.state.selectedUser}</Typography>
+        <Typography>Selected User: {selectedUserId}</Typography>
         <br />
         <Button onClick={this.handleClickOpen}>Select User</Button>
-        <LoginDialog selectedValue={this.state.selectedUser} open={this.state.open} onClose={this.handleClose} />
-        <PrimaryButton onClick={this.handleLoginUser} text="Sign In" />
+        <LoginDialog open={open} onClose={this.handleClose} />
+        <PrimaryButton disabled={selectedUserId === ''} onClick={this.handleLoginUser} text="Sign In" />
       </div>
     );
   }
@@ -50,5 +57,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
   classes: PropTypes.object.isRequired,
+  history: PropTypes.any
 };
-export default withStyles(styles)(Login);
+
+export default  withRouter(connect()(withStyles(styles)(Login)));

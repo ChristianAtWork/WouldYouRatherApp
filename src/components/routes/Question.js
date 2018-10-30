@@ -3,6 +3,9 @@
  */
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 
 class Question extends Component {
   render() {
@@ -10,4 +13,9 @@ class Question extends Component {
   }
 }
 
-export default Question;
+Question.propTypes = {
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.any
+};
+
+export default connect()(Question);
