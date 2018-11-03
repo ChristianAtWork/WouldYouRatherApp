@@ -21,7 +21,7 @@ class QuestionCards extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.cards}>{this.props.questionIds.map(questionId => <QuestionCard id={questionId} />)}</div>
+      <div className={classes.cards}>{this.props.questionIds.map(questionId => <QuestionCard key={questionId} id={questionId} />)}</div>
     );
   }
 }

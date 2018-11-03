@@ -1,5 +1,5 @@
 import * as _DATA from '../../_DATA';
-import { FETCH_QUESTIONS } from './ActionTypes';
+import { FETCH_QUESTIONS, GET_ALL_QUESTIONS } from './ActionTypes';
 import { addAnswer } from './AnwersAction';
 import { handleAnswerQuestion } from './PlayersAction';
 

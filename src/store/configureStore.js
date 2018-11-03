@@ -7,7 +7,7 @@ import RootReducer from './reducers';
 
 const configureStore = preloadedState => {
   const logger = createLogger();
-  const middlewares = [thunk, logger];
+  const middlewares = [thunk];
 
   const store = createStore(RootReducer, preloadedState, composeWithDevTools(applyMiddleware(thunk, ...middlewares)));
 

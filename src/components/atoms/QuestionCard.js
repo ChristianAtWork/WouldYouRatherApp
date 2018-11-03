@@ -48,7 +48,7 @@ function QuestionCard(props) {
       </CardContent>
       <CardActions>
         <div className={classes.button}>
-          <TertiaryButton text={'View Poll'} />
+          <TertiaryButton onClick={() => {}}text={'View Poll'} />
         </div>
       </CardActions>
     </CardWrapper>
@@ -57,7 +57,7 @@ function QuestionCard(props) {
 
 QuestionCard.propTypes = {
   classes: PropTypes.object.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(QuestionCard);
