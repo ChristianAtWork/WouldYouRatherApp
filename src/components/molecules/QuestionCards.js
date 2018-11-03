@@ -19,9 +19,9 @@ const styles = theme => ({
 
 class QuestionCards extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes ,questionIds } = this.props;
     return (
-      <div className={classes.cards}>{this.props.questionIds.map(questionId => <QuestionCard id={questionId} />)}</div>
+      <div className={classes.cards}>{questionIds.map(questionId => <QuestionCard key={questionId} questionId={questionId} />)}</div>
     );
   }
 }
