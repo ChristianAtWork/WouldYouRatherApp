@@ -12,7 +12,8 @@ import React from 'react';
 
 import CardWrapper from './CardWrapper';
 import TertiaryButton from './TertiaryButton';
-
+import PlayerAskedQuestion from '../../container/PlayerAskedQuestion';
+import QuestionAnswers from '../../container/QuestionAnswers';
 
 const styles = {
   user: {
@@ -29,35 +30,45 @@ const styles = {
 };
 
 function QuestionCard(props) {
-  const { classes } = props;
+  const { classes, questionId } = props;
 
   return (
-    <CardWrapper>
-      <CardContent>
-        <div className={classes.user}>
-          <Typography className={classes.title} color="textSecondary">
-            User asks:
-          </Typography>
-          <Avatar className={classes.avatar}>H</Avatar>
-        </div>
-        <Divider />
-        <Typography variant="h5" component="h2">
-          Would you rather
-        </Typography>
-        <Typography component="p">{props.id}...</Typography>
-      </CardContent>
-      <CardActions>
-        <div className={classes.button}>
-          <TertiaryButton onClick={() => {}}text={'View Poll'} />
-        </div>
-      </CardActions>
-    </CardWrapper>
+    <PlayerAskedQuestion
+      questionId={questionId}
+      render={player => (
+        <QuestionAnswers
+          questionId={questionId}
+          render={(questionAnswers) => (
+            <CardWrapper>
+              <CardContent>
+                <div className={classes.user}>
+                  <Typography className={classes.title} color="textSecondary">
+                    {player.name} asks:
+                  </Typography>
+                  <Avatar className={classes.avatar}>{player.name.slice(0, 1)}</Avatar>
+                </div>
+                <Divider />
+                <Typography variant="h5" component="h2">
+                  Would you rather
+                </Typography>
+                <Typography component="p">{questionAnswers && questionAnswers[0].slice(0, 10)}...</Typography>
+              </CardContent>
+              <CardActions>
+                <div className={classes.button}>
+                  <TertiaryButton onClick={() => {}} text={'View Poll'} />
+                </div>
+              </CardActions>
+            </CardWrapper>
+          )}
+        />
+      )}
+    />
   );
 }
 
 QuestionCard.propTypes = {
   classes: PropTypes.object.isRequired,
-  id: PropTypes.string.isRequired,
+  questionId: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(QuestionCard);

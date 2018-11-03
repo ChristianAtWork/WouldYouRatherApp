@@ -17,13 +17,14 @@ class UserQuestions extends Component {
 
   getAnsweredUserQuestions = questionIds => {
     const userAnswersIds = this.props.userPlayer && this.props.userPlayer.answers ? this.props.userPlayer.answers : [];
+
     return questionIds.filter(id => {
       const question = this.props.questions.byId[id];
       return userAnswersIds.includes(question.answers[0]) || userAnswersIds.includes(question.answers[1]);
     });
   };
-  getUnansweredUserQuestions = (questionIds, answeredQuestionIds) =>
-    questionIds.filter(id => !answeredQuestionIds.includes(id));
+
+  getUnansweredUserQuestions = (questionIds, answeredQuestionIds) => questionIds.filter(id => !answeredQuestionIds.includes(id));
 }
 
 UserQuestions.propTypes = {
