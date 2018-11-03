@@ -1,11 +1,11 @@
 /**
  * @author Christian
  */
-import Typography from '@material-ui/core/Typography';
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
 const styles = theme => ({
   button: {

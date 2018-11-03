@@ -1,23 +1,20 @@
 /**
  * @author Christian
  */
-
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
+import Avatar from '@material-ui/core/Avatar';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import TertiaryButton from './TertiaryButton';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import Avatar from '@material-ui/core/Avatar';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
+import React from 'react';
+
+import CardWrapper from './CardWrapper';
+import TertiaryButton from './TertiaryButton';
+
 
 const styles = {
-  card: {
-    width: '90%',
-    margin: 5,
-  },
   user: {
     display: 'flex',
     alignItems: 'center',
@@ -35,7 +32,7 @@ function QuestionCard(props) {
   const { classes } = props;
 
   return (
-    <Card className={classes.card}>
+    <CardWrapper>
       <CardContent>
         <div className={classes.user}>
           <Typography className={classes.title} color="textSecondary">
@@ -54,13 +51,13 @@ function QuestionCard(props) {
           <TertiaryButton text={'View Poll'} />
         </div>
       </CardActions>
-    </Card>
+    </CardWrapper>
   );
 }
 
 QuestionCard.propTypes = {
   classes: PropTypes.object.isRequired,
-  id: PropTypes.number.isRequired
+  id: PropTypes.number.isRequired,
 };
 
 export default withStyles(styles)(QuestionCard);
