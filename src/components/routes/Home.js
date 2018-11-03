@@ -1,17 +1,15 @@
 /**
  * @author Christian
  */
-import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
-import {} from 'prop-types';
+import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Typography from '@material-ui/core/Typography';
 import SwipeableViews from 'react-swipeable-views';
 
-import QuestionsTabs from '../QuestionsTabs';
-import QuestionCards from '../QuestionCards';
+import QuestionCards from '../molecules/QuestionCards';
+import QuestionsTabs from '../molecules/QuestionsTabs';
 
 const styles = theme => ({
   root: {
@@ -25,12 +23,6 @@ const styles = theme => ({
     minWidth: 350,
     marginTop: 16,
   },
-  cards: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
 });
 
 class Home extends Component {
@@ -38,42 +30,33 @@ class Home extends Component {
     index: 0,
   };
   render() {
-    const { user, classes, theme } = this.props;
+    const { user, theme } = this.props;
     const { index } = this.state;
 
     if (!user) {
       return <div> no user</div>;
     }
     return (
-      <div className={classes.container}>
-        <Paper>
-          <QuestionsTabs index={index} onTabChange={this.handleTabChange} />
-          <SwipeableViews
-            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-            index={index}
-            onChangeIndex={this.handleChangeIndex}
-          >
-            <TabContainer dir={theme.direction}>
-              <div className={classes.cards}>
-                <QuestionCards questionIds={[1, 2, 3]} />
-              </div>
-            </TabContainer>
+      <React.Fragment>
+        <QuestionsTabs index={index} onTabChange={this.handleChangeTab} />
+        <SwipeableViews
+          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+          index={index}
+          onChangeIndex={this.handleChangeTab}
+        >
+          <Typography component="div" dir={theme.direction}>
+            <QuestionCards questionIds={[1, 2, 3]} />
+          </Typography>
 
-            <TabContainer dir={theme.direction}>
-              <div className={classes.cards}>
-                <QuestionCards questionIds={[4, 5, 6]} />
-              </div>
-            </TabContainer>
-          </SwipeableViews>
-        </Paper>
-      </div>
+          <Typography component="div" dir={theme.direction}>
+            <QuestionCards questionIds={[4, 5, 6]} />
+          </Typography>
+        </SwipeableViews>
+      </React.Fragment>
     );
   }
-  handleChangeIndex = index => {
-    this.setState({ index });
-  };
 
-  handleTabChange = index => {
+  handleChangeTab = index => {
     this.setState({ index });
   };
   getUserAnswers = (user, players) => {
@@ -90,18 +73,6 @@ class Home extends Component {
     });
   };
 }
-function TabContainer({ children, dir }) {
-  return (
-    <Typography component="div" dir={dir}>
-      {children}
-    </Typography>
-  );
-}
-
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-  dir: PropTypes.string.isRequired,
-};
 
 Home.propTypes = {
   user: PropTypes.string,

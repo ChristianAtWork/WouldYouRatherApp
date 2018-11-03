@@ -42,7 +42,6 @@ const players = (state = { byId: {}, allIds: [] }, action) => {
       };
     }
     case UPDATE_SCORE: {
-      console.log('answerCount', state.byId[action.playerId].answers.length)
       return {
         ...state,
         byId: {

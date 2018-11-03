@@ -4,13 +4,14 @@
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
-import LoginDialog from '../LoginDialog';
-import PrimaryButton from '../PrimaryButton';
-import { loginUserAction } from '../../store/actions/UserAction';
 import { withRouter } from 'react-router-dom';
+
+import { loginUserAction } from '../../store/actions/UserAction';
+import PrimaryButton from '../atoms/PrimaryButton';
+import LoginDialog from '../molecules/LoginDialog';
 
 const styles = {
   root: {

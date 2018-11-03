@@ -20,9 +20,8 @@ const styles = {
 };
 
 class LoginDialog extends React.Component {
-
   handleListItemClick = id => {
-    this.props.onClose(id)
+    this.props.onClose(id);
   };
 
   render() {
@@ -30,19 +29,13 @@ class LoginDialog extends React.Component {
 
     return (
       <Dialog onClose={onClose} aria-labelledby="simple-dialog-title" open={open}>
-        <DialogTitle id="simple-dialog-title">
-          Set backup account
-        </DialogTitle>
+        <DialogTitle id="simple-dialog-title">Login as: </DialogTitle>
         <div>
           <List>
             {players.allIds &&
               players.allIds.map(playerId => {
                 return (
-                  <ListItem
-                    button
-                    onClick={() => this.handleListItemClick(players.byId[playerId].id)}
-                    key={playerId}
-                  >
+                  <ListItem button onClick={() => this.handleListItemClick(players.byId[playerId].id)} key={playerId}>
                     <ListItemAvatar>
                       <Avatar className={classes.avatar}>
                         <PersonIcon />

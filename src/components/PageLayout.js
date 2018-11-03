@@ -9,12 +9,15 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Route, Link } from 'react-router-dom';
 import Home from './routes/Home';
+import LeaderBoard from './routes/LeaderBoard';
 import Login from './routes/Login';
+import RouteWrapper from './atoms/RouteWrapper';
 import { connect } from 'react-redux';
 import { handleFetchPlayers } from '../store/actions/PlayersAction';
 import { handleFetchQuestions } from '../store/actions/QuestionsAction';
 import { withRouter } from 'react-router-dom';
 import { logoutUserAction } from '../store/actions/UserAction';
+
 
 const styles = {
   root: {
@@ -28,6 +31,7 @@ const styles = {
     color: 'white',
     textDecoration: 'inherit',
   },
+
 };
 
 class PageLayout extends Component {
@@ -44,8 +48,6 @@ class PageLayout extends Component {
     this.props.history.push('/Login');
   };
 
-
-
   render() {
     const { classes, user, players } = this.props;
 
@@ -57,6 +59,13 @@ class PageLayout extends Component {
               <MenuItem selected={true}>
                 <Typography variant="button" color="textPrimary" className={classes.grow}>
                   Home
+                </Typography>
+              </MenuItem>
+            </Link>
+            <Link to="/leaderboard" className={classes.href}>
+              <MenuItem>
+                <Typography variant="button" color="textPrimary" className={classes.grow}>
+                  Leader Board
                 </Typography>
               </MenuItem>
             </Link>
@@ -73,17 +82,20 @@ class PageLayout extends Component {
                   <AccountCircle />
                 </IconButton>
                 {players.byId[user].name}
-                  <MenuItem onClick={this.handleLogout}>
-                    <Typography variant="button" color="textPrimary" className={classes.grow}>
-                      Logout
-                    </Typography>
-                  </MenuItem>
+                <MenuItem onClick={this.handleLogout}>
+                  <Typography variant="button" color="textPrimary" className={classes.grow}>
+                    Logout
+                  </Typography>
+                </MenuItem>
               </div>
             )}
           </Toolbar>
         </AppBar>
-        <Route exact path="/" render={() => <Home />} />
-        <Route path="/login" render={() => <Login />} />
+        <RouteWrapper className={classes.container}>
+            <Route exact path="/" render={() => <Home />} />
+            <Route exact path="/leaderboard" render={() => <LeaderBoard />} />
+            <Route path="/login" render={() => <Login />} />
+        </RouteWrapper>
       </div>
     );
   }
