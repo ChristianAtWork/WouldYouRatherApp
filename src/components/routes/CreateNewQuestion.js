@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import PrimaryButton from '../atoms/PrimaryButton';
 
-
 const styles = theme => ({
   container: {
     display: 'flex',
@@ -18,16 +17,21 @@ const styles = theme => ({
     padding: 16,
   },
   or: {
-    alignSelf: 'center'
-  }
+    alignSelf: 'center',
+  },
 });
 
 class CreateNewQuestion extends Component {
   state = {
-    hasAnswers: false,
-  }
+    firstAnswer: '',
+    seconedAnswer: '',
+  };
+
   render() {
     const { classes } = this.props;
+    const { firstAnswer, seconedAnswer } = this.state;
+    const hasAnswers = firstAnswer === '' || seconedAnswer === '';
+
     return (
       <div className={classes.container}>
         <Typography variant="h3">Create New Question</Typography>
@@ -35,13 +39,28 @@ class CreateNewQuestion extends Component {
 
         <Typography variant="body1">Complete the Question:</Typography>
         <Typography variant="h4">Would your rather ...</Typography>
-        <TextField id="standard-with-placeholder" label="With placeholder" placeholder="Placeholder" margin="normal" />
-        <Typography variant="subtitle2" align='center' color='primary'>OR</Typography>
-        <TextField id="standard-with-placeholder" label="With placeholder" placeholder="Placeholder" margin="normal" />
-        <PrimaryButton disabled={this.state.hasAnswers} text='submit'/>
+        <TextField
+          autoFocus
+          onChange={this.handleAnswerChange('firstAnswer')}
+          id="standard-with-placeholder"
+          label="Enter first option"
+          margin="normal"
+        />
+        <Typography variant="subtitle2" align="center" color="primary">
+          OR
+        </Typography>
+        <TextField
+          onChange={this.handleAnswerChange('seconedAnswer')}
+          id="standard-with-placeholder"
+          label="Enter second option"
+          margin="normal"
+        />
+        <PrimaryButton disabled={hasAnswers} text="submit" onClick={() => {}} />
       </div>
     );
   }
+
+  handleAnswerChange = answerKey => e => this.setState({ [answerKey]: e.target.value });
 }
 
 CreateNewQuestion.propTypes = {
