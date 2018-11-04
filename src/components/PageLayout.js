@@ -11,6 +11,7 @@ import { Route, Link } from 'react-router-dom';
 import Home from './routes/Home';
 import LeaderBoard from './routes/LeaderBoard';
 import Login from './routes/Login';
+import CreateNewQuestion from './routes/CreateNewQuestion';
 import RouteWrapper from './atoms/RouteWrapper';
 import { connect } from 'react-redux';
 import { handleFetchPlayers } from '../store/actions/PlayersAction';
@@ -69,6 +70,13 @@ class PageLayout extends Component {
                 </Typography>
               </MenuItem>
             </Link>
+            <Link to="/create" className={classes.href}>
+              <MenuItem>
+                <Typography variant="button" color="textPrimary" className={classes.grow}>
+                  Create Question
+                </Typography>
+              </MenuItem>
+            </Link>
             <Link to="/login" className={classes.href}>
               <MenuItem>
                 <Typography variant="button" color="textPrimary" className={classes.grow}>
@@ -76,6 +84,7 @@ class PageLayout extends Component {
                 </Typography>
               </MenuItem>
             </Link>
+           
             {user !== '' && (
               <div>
                 <IconButton color="inherit">
@@ -95,6 +104,7 @@ class PageLayout extends Component {
             <Route exact path="/" render={() => <Home />} />
             <Route exact path="/leaderboard" render={() => <LeaderBoard />} />
             <Route path="/login" render={() => <Login />} />
+            <Route path="/create" render={() => <CreateNewQuestion />} />
         </RouteWrapper>
       </div>
     );

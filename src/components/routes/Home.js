@@ -60,7 +60,7 @@ class Home extends Component {
                           <Typography component="div" dir={theme.direction}>
                             <QuestionCards questionIds={unansweredQuestionIds} />
                           </Typography>
-                        </SwipeableViews>{' '}
+                        </SwipeableViews>
                       </React.Fragment>
                     ) : (
                       <div> no user</div>

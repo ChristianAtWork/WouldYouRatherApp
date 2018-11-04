@@ -11,9 +11,6 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
   },
-  input: {
-    display: 'none',
-  },
 });
 
 class PrimaryButton extends Component {
@@ -22,7 +19,7 @@ class PrimaryButton extends Component {
 
     return (
       <Button disabled={disabled} onClick={onClick} variant="contained" color="primary" className={classes.button}>
-        <Typography variant="button">{text}</Typography>
+        {text}
       </Button>
     );
   }
