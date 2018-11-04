@@ -1,7 +1,6 @@
 /**
  * @author Christian
  */
-import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';

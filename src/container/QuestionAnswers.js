@@ -2,7 +2,7 @@
  * @author Christian
  */
 
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -10,7 +10,7 @@ class QuestionAnswers extends Component {
   render() {
     const { answers, questions, questionId } = this.props;
     const questionAnswers = this.getAnswers(answers , questions, questionId);
-    
+
     return this.props.render(questionAnswers);
   }
   getAnswers = (answers, questions, questionId) => {
