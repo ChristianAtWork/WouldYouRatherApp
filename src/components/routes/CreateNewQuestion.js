@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import PrimaryButton from '../atoms/PrimaryButton';
+import UserCreateQuestion from '../../container/UserCreateQuestion';
 
 const styles = theme => ({
   container: {
@@ -33,30 +34,34 @@ class CreateNewQuestion extends Component {
     const hasAnswers = firstAnswer === '' || seconedAnswer === '';
 
     return (
-      <div className={classes.container}>
-        <Typography variant="h3">Create New Question</Typography>
-        <Divider />
+      <UserCreateQuestion
+        render={onSubmit => (
+          <div className={classes.container}>
+            <Typography variant="h3">Create New Question</Typography>
+            <Divider />
 
-        <Typography variant="body1">Complete the Question:</Typography>
-        <Typography variant="h4">Would your rather ...</Typography>
-        <TextField
-          autoFocus
-          onChange={this.handleAnswerChange('firstAnswer')}
-          id="standard-with-placeholder"
-          label="Enter first option"
-          margin="normal"
-        />
-        <Typography variant="subtitle2" align="center" color="primary">
-          OR
-        </Typography>
-        <TextField
-          onChange={this.handleAnswerChange('seconedAnswer')}
-          id="standard-with-placeholder"
-          label="Enter second option"
-          margin="normal"
-        />
-        <PrimaryButton disabled={hasAnswers} text="submit" onClick={() => {}} />
-      </div>
+            <Typography variant="body1">Complete the Question:</Typography>
+            <Typography variant="h4">Would your rather ...</Typography>
+            <TextField
+              autoFocus
+              onChange={this.handleAnswerChange('firstAnswer')}
+              id="standard-with-placeholder"
+              label="Enter first option"
+              margin="normal"
+            />
+            <Typography variant="subtitle2" align="center" color="primary">
+              OR
+            </Typography>
+            <TextField
+              onChange={this.handleAnswerChange('seconedAnswer')}
+              id="standard-with-placeholder"
+              label="Enter second option"
+              margin="normal"
+            />
+            <PrimaryButton disabled={hasAnswers} text="submit" onClick={() => onSubmit(firstAnswer, seconedAnswer)} />
+          </div>
+        )}
+      />
     );
   }
 
