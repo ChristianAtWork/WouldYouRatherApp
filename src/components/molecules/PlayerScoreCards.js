@@ -10,10 +10,11 @@ import PlayerScoreCard from '../atoms/PlayerScoreCard';
 
 class PlayerScoreCards extends Component {
     render() {
-        return ([1,2,3].map((questionId => <PlayerScoreCard id={questionId}/>)));
+        return this.props.playersSorted 
+            ? this.props.playersSorted.map((player => <PlayerScoreCard key={player.id} player={player}/>)): <div>loading</div>
     }
 }
 PlayerScoreCards.propTypes = {
-    questionIds: PropTypes.array,
+    playersSorted: PropTypes.array
 }
 export default PlayerScoreCards;
